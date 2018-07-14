@@ -1,0 +1,30 @@
+{
+	"extensionDescription": {
+		"message": "Close the current tab by pressing the key Delete.",
+		"description": "Description of the extension."
+	},
+	"show_closed_tab_notification": {
+		"message": "Show closed tab notification",
+		"description": ""
+	},
+	"show_closed_tab_notification_descr": {
+		"message": "Show a notification every time a tab is closed by pressing the Delete key.",
+		"description": ""
+	},
+	"blacklist": {
+		"message": "Domain blacklist",
+		"description": ""
+	},
+	"blacklist_descr": {
+		"message": "Comma separated list of domains. Delete Tab will not work on these websites.",
+		"description": ""
+	},
+	"savepreferences": {
+		"message": "Save preferences",
+		"description": ""
+	},
+	"notify_preferences_saved": {
+	"message": "Saved preferences",
+		"description": ""
+	}
+}

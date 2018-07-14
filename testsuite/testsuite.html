@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delete Tab - checkboxes</title>
+</head>
+<body>
+	<div>
+		<h2>Action</h2>
+		The action is pressing DELETE on the keyboard as long as the requirements don't mention something else.
+	</div>
+	
+	<div>
+		<h2>Test 1: checked</h2>
+		Requirements:
+		<ul>
+			<li>At least one checkbox is checked.</li>
+		</ul>
+		
+		Expected result:
+		<ul>
+			<li>The page stays open.</li>
+			<li>The testSuiteResult is "Selected items > 0"</li>
+		</ul>
+		
+		<h2>Test 2: not checked (happy path)</h2>
+		Requirements:
+		<ul>
+			<li>No checkbox is checked.</li>
+		</ul>
+		
+		Expected result:
+		<ul>
+			<li>The page closes.</li>
+			<li>The testSuiteResult is "Closing"</li>
+		</ul>
+		
+		<h2>Test 3: modifier pressed</h2>
+		Requirements:
+		<ul>
+			<li>A modifier (Alt, Shift, Control, Meta, OS, AltGraph) is pressed together with Delete</li>
+		</ul>
+		
+		Expected result:
+		<ul>
+			<li>The page stays open.</li>
+			<li>The testSuiteResult is "Modifier pressed"</li>
+		</ul>
+		
+		<h2>Test 4a: input fix (input)</h2>
+		Requirements:
+		<ul>
+			<li>No checkboxes are checked</li>
+			<li>The text input is focused</li>
+		</ul>
+		
+		Expected result:
+		<ul>
+			<li>The page stays open.</li>
+			<li>The testSuiteResult is "Input fix"</li>
+		</ul>
+		
+		<h2>Test 4b: input fix (textarea)</h2>
+		Requirements:
+		<ul>
+			<li>No checkboxes are checked</li>
+			<li>The textarea is focused</li>
+		</ul>
+		
+		Expected result:
+		<ul>
+			<li>The page stays open.</li>
+			<li>The testSuiteResult is "Input fix"</li>
+		</ul>
+		
+		<h2>Test 5: contenteditable fix</h2>
+		Requirements:
+		<ul>
+			<li>No checkboxes are checked</li>
+			<li>The contenteditable is focused</li>
+		</ul>
+		
+		Expected result:
+		<ul>
+			<li>The page stays open.</li>
+			<li>A character is removed (if that's the default behaviour of the browser)</li>
+			<li>The testSuiteResult is "Contenteditable fix"</li>
+		</ul>
+	</div>
+	
+	<div>
+		<h2>Sandbox</h2>
+		<div style="border: solid 2px orange; padding: 10px">
+			<input type="checkbox" checked name="c1"><label for="c1">banana</label>
+			<input type="checkbox" checked name="c2"><label for="c2">orange</label>
+			<input type="text" value="Click inside this input field to test the focus")>
+			<textarea>Click inside this textarea field to test the focus on textareas</textarea>
+			<div contenteditable>Click inside this contenteditable to test the focus on contenteditables</div>
+		</div>
+		
+		testSuiteResult: <div id="testSuiteResult">(none)</div>		
+	</div>
+</body>
+</html>

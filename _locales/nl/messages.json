@@ -1,0 +1,30 @@
+{
+	"extensionDescription": {
+		"message": "Sluit de huidige tab met de toets Delete.",
+		"description": "Description of the extension."
+	},
+	"show_closed_tab_notification": {
+		"message": "Toon een melding bij het sluiten van een tab",
+		"description": ""
+	},
+	"show_closed_tab_notification_descr": {
+		"message": "Toon elke keer een melding bij het sluiten van een tab via de Delete-toets.",
+		"description": ""
+	},
+	"blacklist": {
+		"message": "Zwarte lijst van domeinen",
+		"description": ""
+	},
+	"blacklist_descr": {
+		"message": "Kommagescheiden lijst van domeinen. Delete Tab zal niet werken op deze websites.",
+		"description": ""
+	},
+	"savepreferences": {
+		"message": "Voorkeuren opslaan",
+		"description": ""
+	},
+	"notify_preferences_saved": {
+		"message": "Voorkeuren opgeslagen",
+		"description": ""
+	}
+}

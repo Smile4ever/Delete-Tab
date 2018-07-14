@@ -1,0 +1,33 @@
+{
+	"name": "Delete Tab",
+	"description": "Close the current tab by pressing the key Delete.",
+	"homepage_url": "http://hugsmile.eu",
+	"manifest_version": 2,
+	"version": "1.0.0",
+	"default_locale": "en",
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"icons": {
+		"128": "icons/delete-tab-128.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"all_frames": true,
+			"js": ["deletetab.js"],
+			"run_at": "document_start"
+		}
+	],
+	"applications": {
+		"gecko": {
+			"id": "@deletetab",
+			"strict_min_version": "48.0"
+		}
+	},
+	"permissions": ["storage", "tabs", "notifications"],
+	"options_ui": {
+		"page": "options.html",
+		"browser_style": true
+	}
+}
