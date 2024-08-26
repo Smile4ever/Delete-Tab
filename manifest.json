@@ -1,9 +1,9 @@
 {
 	"name": "Delete Tab",
 	"description": "Close the current tab by pressing the key Delete.",
-	"homepage_url": "http://hugsmile.eu",
-	"manifest_version": 2,
-	"version": "1.0.0",
+	"homepage_url": "https://github.com/Smile4ever/Delete-Tab",
+	"manifest_version": 3,
+	"version": "1.1.0",
 	"default_locale": "en",
 	"background": {
 		"scripts": ["background.js"]
@@ -19,15 +19,14 @@
 			"run_at": "document_start"
 		}
 	],
-	"applications": {
+	"browser_specific_settings": {
 		"gecko": {
 			"id": "deletetabnorestart@hugsmile.eu",
-			"strict_min_version": "48.0"
+			"strict_min_version": "109.0"
 		}
 	},
 	"permissions": ["storage", "tabs", "notifications"],
 	"options_ui": {
-		"page": "options.html",
-		"browser_style": true
+		"page": "options.html"
 	}
 }
