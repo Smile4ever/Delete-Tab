@@ -1,7 +1,7 @@
 let delete_tab_blacklist;
 let delete_tab_hide_notification;
 
-function init(){
+async function init(){
 	let valueOrDefault = function(value, defaultValue){
 		if(value == undefined)
 			return defaultValue;
@@ -13,29 +13,29 @@ function init(){
 		return calcValue.split(" ").join("").split(",");
 	}
 
-	browser.storage.sync.get([
+	let result = await browser.storage.sync.get([
 		"delete_tab_blacklist",
 		"delete_tab_hide_notification"
-	]).then((result) => {
-		delete_tab_blacklist = valueOrDefaultArray(result.delete_tab_blacklist, "");
-		delete_tab_hide_notification = valueOrDefault(result.delete_tab_hide_notification, false);
+	]);
 
-		let preventRegistering = false;
-		if(delete_tab_blacklist[0] != ""){
-			for(let site of delete_tab_blacklist){
-				if(site == getRootDomain(window.location.href) || window.location.href.indexOf(site) > -1){
-					preventRegistering = true;
-				}
+	delete_tab_blacklist = valueOrDefaultArray(result.delete_tab_blacklist, "");
+	delete_tab_hide_notification = valueOrDefault(result.delete_tab_hide_notification, false);
+
+	let preventRegistering = false;
+	if(delete_tab_blacklist[0] != ""){
+		for(let site of delete_tab_blacklist){
+			if(site == getRootDomain(window.location.href) || window.location.href.indexOf(site) > -1){
+				preventRegistering = true;
 			}
 		}
+	}
 
-		if(!preventRegistering){
-			//console.log("Registering for " + window.location.href);
-			registerDeleteTab();
-		}else{
-			//console.log("Not registering Delete Tab for " + window.location.href);
-		}
-	}).catch(console.error);
+	if(!preventRegistering){
+		//console.log("Registering for " + window.location.href);
+		registerDeleteTab();
+	}else{
+		//console.log("Not registering Delete Tab for " + window.location.href);
+	}
 }
 init();
 
@@ -58,10 +58,17 @@ function registerDeleteTab(){
 			
 			// Check if there is a checkbox selection (Zoho Mail / more to come)
 			if(document.querySelectorAll(".SC_check").length > 0 || document.querySelectorAll("input:checked").length > 0){
-				setTestSuiteResult("Selected items > 0");
+				setTestSuiteResult("Selected items Zoho Mail > 0");
 				return;
 			}
 			
+			// Check if there is a checkbox selection (Gmail)
+			const isAnyChecked = Array.from(document.querySelectorAll('div[role="checkbox"]')).some(el => el.getAttribute('aria-checked') === 'true');
+			if(isAnyChecked){
+				setTestSuiteResult("Selected items Gmail > 0");
+				return;
+			}
+
 			let tagName = document.activeElement.tagName.toLowerCase();
 			if(tagName == "input" || tagName == "textarea" || tagName == "button" || tagName == "i"){
 				setTestSuiteResult("Input fix");

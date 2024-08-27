@@ -9,32 +9,33 @@ const PREFS = {
 	}
 };
 
-function saveOptions() { 
+async function saveOptions() { 
 	const values = {};
 	for(let p in PREFS) {
 		values[p] = document.getElementById(p)[PREFS[p].type];
 	}
 
-	browser.storage.sync.set(values).then(() => browser.runtime.sendMessage({action: "notify", data: browser.i18n.getMessage("notify_preferences_saved")}));
+	await browser.storage.sync.set(values);
+	browser.runtime.sendMessage({action: "notify", data: browser.i18n.getMessage("notify_preferences_saved")});
 }
 
-function restoreOptions() {
-	return browser.storage.sync.get(Object.keys(PREFS)).then((result) => {
-		let val;
-		for(let p in PREFS) {
-			if(p in result) {
-				val = result[p];
-			}
-			else {
-				val = PREFS[p].default;
-			}
-			document.getElementById(p)[PREFS[p].type] = val;
+async function restoreOptions() {
+	let result = await browser.storage.sync.get(Object.keys(PREFS));
+
+	let val;
+	for(let p in PREFS) {
+		if(p in result) {
+			val = result[p];
 		}
-	}).catch(console.error);
+		else {
+			val = PREFS[p].default;
+		}
+		document.getElementById(p)[PREFS[p].type] = val;
+	}
 }
 
-function init(){
-	restoreOptions();
+async function init(){
+	await restoreOptions();
 
 	document.querySelector("form").style.display = "block";
 	document.querySelector(".refreshOptions").style.display = "none";

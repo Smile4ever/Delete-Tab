@@ -3,7 +3,7 @@
 	"description": "Close the current tab by pressing the key Delete.",
 	"homepage_url": "https://github.com/Smile4ever/Delete-Tab",
 	"manifest_version": 3,
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"default_locale": "en",
 	"background": {
 		"scripts": ["background.js"]

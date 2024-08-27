@@ -1,29 +1,26 @@
 ///Messages
 // listen for messages from the content or options script
-browser.runtime.onMessage.addListener(function(message) {
+browser.runtime.onMessage.addListener(async function(message) {
 	switch (message.action) {
 		case "notify":
 			notify(message.data);
 			break;
 		case "closeTabOnDelete":
-			closeTabOnDelete(message.data);
+			await closeTabOnDelete(message.data);
 			break;
 		default:
 			break;
 	}
 });
 
-function closeTabOnDelete(show_notification){
-	function logTabs(tabs) {
-		for (tab of tabs) {
-			if(show_notification){
-				notify("Closed tab " + tab.title);
-			}
-			browser.tabs.remove(tab.id);
-		}
-	}
+async function closeTabOnDelete(show_notification){
+	let tabs = await browser.tabs.query({currentWindow: true, active: true});
+	let tab = tabs[0];
 
-	browser.tabs.query({currentWindow: true, active: true}).then(logTabs, onError);
+	if(show_notification){
+		notify("Closed tab " + tab.title);
+	}
+	browser.tabs.remove(tab.id);
 }
 
 /// Helper functions
@@ -34,7 +31,7 @@ function onError(error) {
 function notify(message){
 	browser.notifications.create({
 		type: "basic",
-		iconUrl: browser.extension.getURL("icons/delete-tab-128.png"),
+		iconUrl: browser.runtime.getURL("icons/delete-tab-128.png"),
 		title: "Delete Tab",
 		message: message
 	});
